@@ -1,1 +1,0 @@
-https://www.geeksforgeeks.org/how-to-compress-images-using-python-and-pil/
