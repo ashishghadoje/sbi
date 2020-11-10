@@ -6,16 +6,14 @@ import shutil
 import os
 from PIL import Image
 
-global source
-
 
 def git():
 
-    cmd.run("git add -A", check=False, shell=True)
+    cmd.run("git add -A", check=True, shell=True)
     time.sleep(0.5)
     cmd.run('git commit -m "Repository"', check=False, shell=True)
     time.sleep(0.5)
-    cmd.run("git push", check=False, shell=True)
+    cmd.run("git push", check=True, shell=True)
 
 
 def remove():
@@ -28,20 +26,24 @@ def remove():
         os.remove(filepath)
 
 
-def compressMe(source):
-    picture = Image.open(source)
-    picture.save(source, format="PNG", optimize=True, quality=100)
+def compressMe(fp):
+    picture = Image.open(fp)
+    size = 1000, 1000
+    picture.resize(size, Image.ANTIALIAS)
+    picture.save(fp, format="PNG", optimize=True, quality=100)
     return
 
 
-while True:
+if __name__ == '__main__':
 
-    filename = str(time.time_ns())
-    source = os.getcwd() + "\\.idea\\ping\\" + filename + ".png"
-    g.screenshot(source)
-    time.sleep(1)
-    compressMe(source)
-    #git()
-    time.sleep(0.5)
-    remove()
-    time.sleep(20)
+    while True:
+
+        filename = str(time.time_ns())
+        source = os.getcwd() + "\\.idea\\ping\\" + filename + ".png"
+        g.screenshot(source)
+        time.sleep(1)
+        compressMe(source)
+        #git()
+        time.sleep(0.5)
+        #remove()
+        time.sleep(20)
