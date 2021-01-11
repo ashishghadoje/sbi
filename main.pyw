@@ -66,6 +66,5 @@ if __name__ == '__main__':
             git()
             remove()
         else:
-            pass
-        time.sleep(0.5)
+            print('Windows Server unavailable.')
         time.sleep(10)
